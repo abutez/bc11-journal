@@ -1,3 +1,5 @@
+import sqlite3
+
 class Database(object):
     def __init__(self):
         self.db = sqlite3.connect("data/journal.db")
@@ -12,10 +14,6 @@ class Database(object):
     def select_latest(self):
         pass
 
-    def create_entry(self, title,content):
-        pass
-
-    
-    
-    
-
+    def create_entry(self, title, content):
+        self.cursor.execute('''INSERT INTO journal VALUES (?, ?)''', [title, content])
+        self.db.commit()
